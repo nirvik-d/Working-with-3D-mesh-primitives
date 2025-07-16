@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>Working with 3D mesh primitives</title>
+
+    <script type="module" src="https://js.arcgis.com/calcite-components/3.2.1/calcite.esm.js"></script>
+    <link rel="stylesheet" href="https://js.arcgis.com/4.33/esri/themes/light/main.css" />
+    <script src="https://js.arcgis.com/4.33/"></script>
+
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <div id="viewDiv"></div>
+
+    <calcite-panel theme="light" scale="s" id="menu">
+      <h3 class="heading" slot="header-content">Working with 3D mesh primitives</h3>
+      <calcite-stepper id="stepperMenu" numbered layout="horizontal" scale="m">
+        <calcite-stepper-item heading="Create" selected>
+          <div class="explanation">
+            To create some models you first need to add primitive shapes. You can either use the
+            predefined one (as for the box) or create it yourself by defining the vertices (as for
+            the pyramid).
+          </div>
+        </calcite-stepper-item>
+        <calcite-stepper-item heading="Modify">
+          <div class="explanation">
+            Later you need to combine the individual meshes into a single one. You can offset,
+            rotate, scale or clone them to place them in desired positions.
+          </div>
+          <calcite-label alignment="center" layout="default" scale="m">
+            Number of trees
+            <calcite-slider id="amountSlider" value="1" label-handles label-ticks min="1" max="30">
+            </calcite-slider>
+          </calcite-label>
+        </calcite-stepper-item>
+        <calcite-stepper-item heading="Style" disabled>
+          <div class="explanation">
+            Finally, you can style the whole mesh as well as specific components. You can apply
+            different colors and textures and style the edges.
+          </div>
+          <calcite-label layout="inline">
+            <calcite-switch id="meshEdges"></calcite-switch>
+            Sketch edges
+          </calcite-label>
+          <calcite-label layout="inline">
+            <calcite-switch id="meshTexture"></calcite-switch>
+            Texture
+          </calcite-label>
+        </calcite-stepper-item>
+      </calcite-stepper>
+    </calcite-panel>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>

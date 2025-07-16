@@ -1,0 +1,29 @@
+html,
+body,
+#viewDiv {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
+calcite-panel {
+  width: 330px;
+  height: 380px;
+}
+
+calcite-stepper {
+  padding: 1rem;
+}
+
+calcite-label {
+  margin: auto;
+}
+
+calcite-slider {
+  width: 10rem;
+}
+
+.explanation {
+  padding: 1rem;
+}
