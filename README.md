@@ -13,7 +13,7 @@ A web application that demonstrates how to create and manipulate custom 3D mesh 
 ## Screenshot
 
 1. The main application
-   <img width="959" alt="image" src="https://github.com/user-attachments/assets/79cc173d-6137-4445-a2ca-295f7c856eb2" />
+<img width="959" height="478" alt="image" src="https://github.com/user-attachments/assets/6b8e5676-4d46-4861-8689-e11b355bc4a5" />
 
 ## Prerequisites
 
