@@ -4,16 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
     <title>Working with 3D mesh primitives</title>
-
-    <script type="module" src="https://js.arcgis.com/calcite-components/3.2.1/calcite.esm.js"></script>
-    <link rel="stylesheet" href="https://js.arcgis.com/4.33/esri/themes/light/main.css" />
-    <script src="https://js.arcgis.com/4.33/"></script>
-
-    <link rel="stylesheet" href="./src/style.css" />
   </head>
   <body>
-    <div id="viewDiv"></div>
-
+    <arcgis-scene item-id="4b3a6453bfc44e8599ac59bef0820a50">
+      <arcgis-zoom position="top-left"></arcgis-zoom>
+      <arcgis-navigation-toggle position="top-left"></arcgis-navigation-toggle>
+      <arcgis-compass position="top-left"></arcgis-compass>
+    </arcgis-scene>
     <calcite-panel theme="light" scale="s" id="menu">
       <h3 class="heading" slot="header-content">Working with 3D mesh primitives</h3>
       <calcite-stepper id="stepperMenu" numbered layout="horizontal" scale="m">

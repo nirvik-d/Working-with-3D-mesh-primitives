@@ -1,145 +1,3 @@
-# Working with 3D Mesh Primitives
-
-A web application that demonstrates how to create and manipulate custom 3D mesh primitives using ArcGIS JavaScript API.
-
-## Features
-
-* **Custom Mesh Creation:** Create 3D pyramids and trees from scratch
-* **Mesh Manipulation:** Duplicate and position meshes randomly
-* **Texture Support:** Apply custom needle-like textures
-* **Edge Styling:** Toggle between sketch and solid edges
-* **Workflow Steps:** Organized creation, modification, and styling steps
-
-## Screenshot
-
-1. The main application
-<img width="959" height="478" alt="image" src="https://github.com/user-attachments/assets/6b8e5676-4d46-4861-8689-e11b355bc4a5" />
-
-## Prerequisites
-
-* Node.js
-* Vite
-
-## Project Setup
-
-### Initialize Project
-
-```bash
-npm create vite@latest
-```
-
-Follow the instructions on screen to initialize the project.
-
-### Install Dependencies
-
-```bash
-npm install @arcgis/map-components
-```
-
-## Code Structure
-
-### HTML Structure
-
-```html
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
-    <title>Working with 3D mesh primitives</title>
-  </head>
-  <body>
-    <arcgis-scene item-id="4b3a6453bfc44e8599ac59bef0820a50">
-      <arcgis-zoom position="top-left"></arcgis-zoom>
-      <arcgis-navigation-toggle position="top-left"></arcgis-navigation-toggle>
-      <arcgis-compass position="top-left"></arcgis-compass>
-    </arcgis-scene>
-    <calcite-panel theme="light" scale="s" id="menu">
-      <h3 class="heading" slot="header-content">Working with 3D mesh primitives</h3>
-      <calcite-stepper id="stepperMenu" numbered layout="horizontal" scale="m">
-        <calcite-stepper-item heading="Create" selected>
-          <div class="explanation">
-            To create some models you first need to add primitive shapes. You can either use the
-            predefined one (as for the box) or create it yourself by defining the vertices (as for
-            the pyramid).
-          </div>
-        </calcite-stepper-item>
-        <calcite-stepper-item heading="Modify">
-          <div class="explanation">
-            Later you need to combine the individual meshes into a single one. You can offset,
-            rotate, scale or clone them to place them in desired positions.
-          </div>
-          <calcite-label alignment="center" layout="default" scale="m">
-            Number of trees
-            <calcite-slider id="amountSlider" value="1" label-handles label-ticks min="1" max="30">
-            </calcite-slider>
-          </calcite-label>
-        </calcite-stepper-item>
-        <calcite-stepper-item heading="Style" disabled>
-          <div class="explanation">
-            Finally, you can style the whole mesh as well as specific components. You can apply
-            different colors and textures and style the edges.
-          </div>
-          <calcite-label layout="inline">
-            <calcite-switch id="meshEdges"></calcite-switch>
-            Sketch edges
-          </calcite-label>
-          <calcite-label layout="inline">
-            <calcite-switch id="meshTexture"></calcite-switch>
-            Texture
-          </calcite-label>
-        </calcite-stepper-item>
-      </calcite-stepper>
-    </calcite-panel>
-
-    <script type="module" src="./src/main.js"></script>
-  </body>
-</html>
-```
-
-### CSS Structure
-
-```css
-@import "https://js.arcgis.com/calcite-components/3.2.1/calcite.css";
-@import "https://js.arcgis.com/4.33/esri/themes/light/main.css";
-@import "https://js.arcgis.com/4.33/map-components/main.css";
-
-html,
-body {
-  padding: 0;
-  margin: 0;
-  height: 100%;
-  width: 100%;
-}
-
-calcite-panel {
-  width: 330px;
-  height: 380px;
-}
-
-calcite-stepper {
-  padding: 1rem;
-}
-
-calcite-label {
-  margin: auto;
-}
-
-calcite-slider {
-  width: 10rem;
-}
-
-.explanation {
-  padding: 1rem;
-}
-
-```
-
-### TypeScript Structure
-
-1. **Import the required modules**
-
-```typescript
 import "./style.css";
 
 import "@arcgis/map-components/components/arcgis-scene";
@@ -167,11 +25,7 @@ import SolidEdges3D from "@arcgis/core/symbols/edges/SolidEdges3D";
 import SketchEdges3D from "@arcgis/core/symbols/edges/SketchEdges3D";
 import * as meshUtils from "@arcgis/core/geometry/support/meshUtils";
 import Color from "@arcgis/core/Color";
-```
 
-2. **Create a Graphics layer and add it to the scene view**
-
-```typescript
 const scene = document.querySelector("arcgis-scene");
 if (!scene) {
   throw new Error("Scene element not found");
@@ -188,11 +42,9 @@ const graphicsLayer: GraphicsLayer = new GraphicsLayer({
   },
 });
 view.map?.add(graphicsLayer);
-```
 
-3. **Create a box mesh and a pyramid mesh. Add them to the graphics layer**
-
-```typescript
+// Create a mesh
+// Select a placement point
 const point: Point = new Point({
   x: 685870,
   y: 8972310,
@@ -288,11 +140,7 @@ const pyramidGraphic: Graphic = new Graphic({
 
 // Add meshes to the graphics layer
 graphicsLayer.add(pyramidGraphic);
-```
 
-4. **Setup the mesh modifcation UI to turn the box and pyramid meshes into a tree**
-
-```typescript
 // Modify the meshes
 // Modify the mesh to a tree
 const treeMesh: Mesh = meshUtils.merge([
@@ -338,11 +186,10 @@ function duplicateModels(
     graphicsLayer.add(treeGraphic);
   }
 }
-```
 
-5. **Setup the helper functions to style the meshes**
 
-```typescript
+// Styling the mesh
+// Styling the edges
 const meshEdges: HTMLCalciteSwitchElement | null = document.querySelector("#meshEdges");
 if (!meshEdges) {
   throw new Error("Mesh edges switch not found");
@@ -434,11 +281,7 @@ function drawNeedleTexture(): HTMLCanvasElement {
 
   return canvas;
 }
-```
 
-6. **Setup the UI controls for styling the meshes with textures and edges**
-
-```typescript
 // Setting up the menu
 const stepperMenu: HTMLCalciteStepperElement | null = document.querySelector("#stepperMenu");
 if (!stepperMenu) {
@@ -474,19 +317,4 @@ stepperMenu.addEventListener("calciteStepperChange", () => {
     stepperMenu.children[1].removeAttribute("disabled");
   }
 });
-```
 
-### Running the Application
-
-1. For development, run:
-```bash
-npm run dev
-```
-
-The application can then be run on `https://localhost:5173`
-
-2. For production, run:
-```bash
-npm run build
-npm run preview
-```
